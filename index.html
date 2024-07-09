@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>NorthernVirginiaCommCollege-AirlineSeats</title>
+        </head>
+    
+    <body>
+    <header>
+    <h1 class="title">Airline Seats Reservation</h1>
+    </header>  
+    
+    <h2>Enter Passenger Name and Select a Seat to Make a Reservation</h2>
+    PassengerName:<textarea id="#name"></textarea>
+    <button type="button" onclick="enterName()">Input</button>
+      <h3>Rows 1 ~ 6;  Seats (A B C D)</h3>
+    <section>
+            
+            <div class="game--container">
+                <div data-cell-index="0" class="cell"></div>
+                <div data-cell-index="1" class="cell"></div>
+                <div data-cell-index="2" class="cell"></div>
+                <div data-cell-index="3" class="cell"></div>
+                <div data-cell-index="4" class="cell"></div>
+                <div data-cell-index="5" class="cell"></div>
+                <div data-cell-index="6" class="cell"></div>
+                <div data-cell-index="7" class="cell"></div>
+                <div data-cell-index="8" class="cell"></div>
+                <div data-cell-index="9" class="cell"></div>
+                <div data-cell-index="10" class="cell"></div>
+                <div data-cell-index="11" class="cell"></div>
+                <div data-cell-index="12" class="cell"></div>
+                <div data-cell-index="13" class="cell"></div>
+                <div data-cell-index="14" class="cell"></div>
+                <div data-cell-index="15" class="cell"></div>
+                <div data-cell-index="16" class="cell"></div>
+                <div data-cell-index="17" class="cell"></div>
+                <div data-cell-index="18" class="cell"></div>
+                <div data-cell-index="19" class="cell"></div>
+                <div data-cell-index="20" class="cell"></div>
+                <div data-cell-index="21" class="cell"></div>
+                <div data-cell-index="22" class="cell"></div>    
+                <div data-cell-index="23" class="cell"></div>
+                </div>
+          
+        </section>
+        <p id="1A"></p>
+            <h4 class="game--status"></h4>
+            <button class="game--restart">Restart</button>
+       </body>
+</html>
+
+<style>
+body {
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #d0f0f6;
+}
+header {
+  border: 2px solid gray;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-image: url("https://kidventurous.com/wp-content/uploads/2014/11/airline-seats.png");
+}
+h1 {
+   font-size: 60px;
+   color: #5586e2;
+}
+h2 {
+   font-size: 30px;
+   color: #008B8B;
+}
+h3 {
+   font-size: 25px;
+   color: #FF69B4;
+}
+section {
+    text-align: center;
+}
+
+.cell {
+    font-family: "Permanent Marker", cursive;
+    width: 125px;
+    height: 125px;
+    box-shadow: 2px 2px 2px 2px #ecd7ba;
+    border: 2px solid #ecd7ba;
+    cursor: pointer;
+    line-height: 125px;
+    font-size: 25px;
+}
+
+.game--title {
+    font-size: 100px;
+    color: #d7a62f;
+    margin: 10px auto;
+}
+
+.game--container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    width: 512px;
+    margin: 10px auto;
+    background-color: #11213a;
+    color: #04c0b2;
+}
+
+.game--status {
+    font-size: 40px;
+    color: #4B0082;
+    margin: 20px auto;
+}
+
+.game--restart {
+    background-color: #f7e4ac;
+    width: 200px;
+    height: 50px;
+    font-size: 25px;
+    color: #5586e2;
+    box-shadow: 2px 2px 2px 2px #d86c23;
+    border: 2px solid #d86c23;
+}
+</style>
+
+
+<script>
+const statusDisplay = document.querySelector('.game--status');
+let gameActive = true;
+let currentPlayer = "X";
+let gameState = ["", "", "", "", "", "", "", "", "","","","", "", "", "", "", "", "", "", "","","","",""];
+
+
+
+function handleCellClick(clickedCellEvent) {
+    const clickedCell = clickedCellEvent.target;
+    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+
+handleCellPlayed(clickedCell, clickedCellIndex);  
+}
+function enterName() {
+  var z0 = document.getElementById("#name").value;
+  currentPlayer = z0;
+}
+function handleCellPlayed(clickedCell, clickedCellIndex) {
+    gameState[clickedCellIndex] = currentPlayer;
+    clickedCell.innerHTML = currentPlayer;
+}
+
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+
+function handleRestartGame() {
+    gameActive = true;
+    gameState = ["", "", "", "", "", "", "", "", "","","","", "", "", "", "", "", "", "", "","","","",""];
+    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+}
+
+statusDisplay.innerHTML = "The flight is full; all seats are reserved.";
+
+
+</script>
